@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Announce's page!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center">Welcome to you in the main announces's page <br>مرحبًا بك في صفحة الإعلانات الرئيسية</h1>
+    <div class="row">
+    {% for a in 0..20 %}
+                   <div class="col-md-4">
+                <div class="card bg-light mb-4">
+                    <div class="card-header text-center">
+                    3 rooms <strong>35$ night</strong><br>
+                    <small>Not available yet</small>
+                    </div>
+                     <img src="http://placehold.it/900x400" alt="Image of appartement" 
+                     style="height:200px width: 100% display: block">
+                </div>
+                <div class="card-body">
+                <h1 class="card-title">Best choice appartement</h1>
+                    <p>
+                        Best choice here you will have more than you have imagined. We give you best
+                        than your expectations
+                    </p>
+                    <a href="#" class="btn btn-primary">Read More+</a>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
