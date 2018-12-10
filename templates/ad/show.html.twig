@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{{ ad.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="ad-title" style="background-image: url({{ ad.coverImage }})">
+        <div class="container">
+            <h1 class="text-center">{{ ad.title }}</h1>
+            <p>  {{ ad.introduction }} </p>
+            <p class="h2">
+            <strong>{{ ad.rooms }} Rooms</strong> for <strong>{{ ad.price }} $/month</strong>
+            </p>
+            <a href="#" class="btn btn-primary">Reseve</a>
+        </div>
+    </div>
+
+    <div class="container"><!--Start container-->
+      <div class="row"><!--Start first-row -->
+         <div class="col-md-8 mb-3"><!--Start  col-8 first Row-->
+             {{ ad.description | raw }}
+              {# Carousel with images #}
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for image in ad.images %}
+                        <li  data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}"
+                            class="{% if loop.first %}active{% endif %}">
+                        </li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in ad.images %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img class="d-block w-100" src="{{ image.url }}" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{ ad.title }}</h5>
+                                    <p>{{ image.caption }}</p>
+                                 </div>
+                            </div>
+                        {% endfor %}
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                 </div>
+            </div><!--End col-8 first row -->
+             <div class="col"><!--Start col-4 first row -->
+                <div class="row"><!--Start second Row -->
+                    <div class="col-4"><!--Start first col-second row -->
+                        <img src="http://placehold.it/55x55" alt="announcer image">
+                    </div><!--End col- second row-->
+                    <div class="col"><!--Start col-remain secod row-->
+                            <h3>Mardino co</h3>
+                            <span class="badge badge-primary">4 announces</span>
+                            <p>Omnis aliquid aliquam consequatur cupiditate quisquam, facere corporis
+                                ducimus modi ullam possimus. Quasi doloribus ipsum deleniti, esse id ipsa
+                                repellat!
+                            </p>
+                            <p>Doloremque rerum, sunt quos iusto incidunt aperiam quibusdam, iste amet aut
+                                nulla aspernatur repudiandae! Optio omnis laboriosam voluptatum delectus ab.</p>
+                            <p>Cum vitae odit esse placeat officia debitis neque quibusdam sit odio? Id
+                           deleniti itaque, debitis magni recusandae consectetur distinctio nemo?</p>
+                    </div><!--End col-remain second row -->
+             </div> <!-- End col-4 first row -->
+      </div><!--End first-Row-->
+    </div><!-- End container-->
+{% endblock %}

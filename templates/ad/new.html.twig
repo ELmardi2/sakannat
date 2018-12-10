@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create your announce {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Create And Add Your Announce Here <br>انشاء واضف اعلانك هنا</h1>
+
+        {# Render the form here#}
+        {{ form_start(form) }}
+           {{ form_widget(form) }} 
+
+           <button type="submit" class="btn btn-primary">Create your announce</button>
+           
+        {{ form_end(form) }}
+    </div>
+    
+{% endblock %}

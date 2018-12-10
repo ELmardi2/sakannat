@@ -7,15 +7,27 @@
         <title>
             {% block title %}Sackanat{% endblock %}
         </title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/app.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
     {% include 'incs/_nav.html.twig' %}
-        {% block body %}{% endblock %}
-        <script  src="js/jquery.min.js"></script>
-        <script  src="js/popper.min.js"></script>
-        <script  src="js/bootstrap.min.js"></script>
+   
+    {% for label, messages in app.flashes %}
+        <div class="container">
+            <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message | raw}}</p>
+            {% endfor %}
+        </div>
+        </div>
+    {% endfor %}
+        {% block body %}
+        {% endblock %}
+        <script  src="/js/jquery.min.js"></script>
+        <script  src="/js/popper.min.js"></script>
+        <script  src="/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
         {% include 'incs/_footer.html.twig' %}
     </body>
