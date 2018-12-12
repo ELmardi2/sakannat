@@ -7,7 +7,7 @@ div.ad-title{
     background-position: center center;
 }
 
-div.ad-title, h1 div.ad-title,p{
+div.ad-title, h1 p div.ad-title{
 color: white;
 text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }

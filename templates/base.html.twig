@@ -23,12 +23,14 @@
         </div>
         </div>
     {% endfor %}
-        {% block body %}
-        {% endblock %}
+    
+        {% block body %}{% endblock %}
+
+        {% include 'incs/_footer.html.twig' %}
+
         <script  src="/js/jquery.min.js"></script>
         <script  src="/js/popper.min.js"></script>
         <script  src="/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
-        {% include 'incs/_footer.html.twig' %}
     </body>
 </html>
