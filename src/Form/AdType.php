@@ -21,16 +21,17 @@ class AdType extends AbstractType
      *
      * @param string $label
      * @param string $placeholder
+     * @param array $options
      * @return array
      * 
      */
-    private function getConfig($label, $placeholder)
+    private function getConfig($label, $placeholder, $options =[])
     {
-        return ["label" =>$label,
+        return array_merge (["label" =>$label,
 
             "attr"=>["placeholder" => $placeholder
             ]
-        ];
+        ], $options);
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -40,7 +41,9 @@ class AdType extends AbstractType
                 )
             ->add(
                     'slug', TextType::class, $this->getConfig(
-                    "Address web", "It will be taken automatically")
+                    "Address web", "It will be taken automatically", [
+                        "required" => false
+                    ])
                     )
             ->add(
                 'introduction', TextType::class, $this->getConfig(
