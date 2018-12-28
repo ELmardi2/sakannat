@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition of the announce{% endblock %}
+
+{% form_theme  form '/ad/_collection.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Welcome to page  edit your announce  <br> مرحبًا بك في صفحة تعديل إعلانك</h1>
+        <h3 class="text-center">Edit your announce : {{ ad.title }}</h3>
+
+         {# Render the form here#}
+        {{ form_start(form) }}
+           {{ form_widget(form) }} 
+
+           <button type="submit" class="btn btn-primary">Edit or Update your announce</button>
+           
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+ {% block javascripts %}
+    <script src="/js/ad.js"></script>
+ {% endblock %}
