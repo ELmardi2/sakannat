@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account-regisration{% endblock %}
+
+{% block body %}
+    <div class="container">
+       <h1 class="text-center">Create your account in our website !</h1>
+       <div class="bg-light py-3 px-3">
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                        <input type="submit" class="btn btn-success" value="Confirm Registration" />
+
+                    {{ form_end(form) }}
+               </div>
+        </div>
+       </div>
+    </div>
+{% endblock %}

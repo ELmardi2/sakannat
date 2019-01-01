@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account-modification{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Here is Your infos You can edit or change something</h1>
+       {{form_start(form)}}
+       
+       {{form_widget(form)}}
+
+        <button type="submit" class="btn btn-success">Save your modefications</button>
+
+        {{ form_end(form) }}
+
+
+    </div>
+{% endblock %}

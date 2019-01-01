@@ -7,16 +7,26 @@
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav m-auto float">
-                                <li><a href="{{ path('homepage') }}" class=" btn btn-secondary">Home</a></li>
-                                <li><a href="{{ path('ads_index') }}" class=" btn btn-secondary">Announces</a></li>
-                                 <li><a href="#" class=" btn btn-secondary">About-us</a></li>
-                                <li><a href="#" class=" btn btn-secondary">Agencies</a></li>
-                                <li><a href="#" class=" btn btn-secondary">Contact-us</a></li>
+                                <li class="nav nav-item"><a href="{{ path('homepage') }}" class="nav-link">Home</a></li>
+                                <li><a href="{{ path('ads_index') }}" class=" nav-link">Announces</a></li>
+                                 <li><a href="#" class=" nav-link">About-us</a></li>
+                                <li><a href="#" class=" nav-link">Agencies</a></li>
+                                <li><a href="#" class=" nav-link">Contact-us</a></li>
                         </ul>
-                        <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                        <a href="#" class="nav-link btn btn-secondary">My Account !</a>
-                        </li>
+                        <ul class="navbar-nav ml-auto ">
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a href="{{ path('account_logout') }}" class="link nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                             <li class="nav-item">
+                                <a href="{{ path('account_register') }}" class="nav-link">Inscription</a>
+                            </li>
+                            &nbsp;
+                             <li class="nav-item ">
+                                <a href="{{ path('account_login') }}" class="link nav-link">Login</a>
+                            </li>
+                        {% endif %}
                         </ul>
                     </div>
             </nav>
