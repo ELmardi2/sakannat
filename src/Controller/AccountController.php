@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Entity\UpdatePassword;
 use App\Form\RegistrationType;
+use App\Form\PasswordUpdateType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,9 +97,68 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
            $manager->persist($user);
            $manager->flush();
+           $this->addFlash(
+            "success", "Your account's infos has saved successfully !"
+        );
         }
         return $this->render('/account/profile.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Update password 
+     *
+     * @Route("/account/password-update", name="account_password")
+     * 
+     * @return Response
+     */
+    public function passwordUpdate(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager){
+        $passwordUpdate = new UpdatePassword();
+        $user = $this->getUser();
+
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!password_verify($passwordUpdate->getOldPassword(), $user->getHash())) {
+                
+                $form->get('oldPassword')->addError(new FormError(
+                    'The password you entred it is not your password actuel please check it')
+                );
+            }else {
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($user, $newPassword);
+
+                $user->setHash($hash);
+
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash(
+                    "success", "Your password has set successfully"
+                );
+
+                return $this->redirectToRoute('homepage');
+            }
+        }
+
+        return $this->render('/account/password.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * to show my account directly
+     * 
+     * @Route("/account", name="account_index")
+     *
+     * @return Response
+     */
+    public function myAccount()
+    {
+        return $this->render('/user/index.html.twig', [
+            'user' => $this->getUser()
         ]);
     }
 }

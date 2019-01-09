@@ -50,21 +50,19 @@
                  </div>
             </div><!--End col-8 first row -->
              <div class="col"><!--Start col-4 first row -->
+             {% set a = ad.author %}
                 <div class="row"><!--Start second Row -->
-                    <div class="col-4"><!--Start first col-second row -->
-                        <img src="http://placehold.it/55x55" alt="announcer image">
+                    <div class="col-3"><!--Start first col-second row -->
+                    <a href="{{ path('user_show', {'slug':a.slug}) }}">
+                        <img src="{{ a.picture }}"class="avatar avatar-medium" alt="{{ a.fullName }}">
+                        </a>
                     </div><!--End col- second row-->
                     <div class="col"><!--Start col-remain secod row-->
-                            <h3>Mardino co</h3>
-                            <span class="badge badge-primary">4 announces</span>
-                            <p>Omnis aliquid aliquam consequatur cupiditate quisquam, facere corporis
-                                ducimus modi ullam possimus. Quasi doloribus ipsum deleniti, esse id ipsa
-                                repellat!
-                            </p>
-                            <p>Doloremque rerum, sunt quos iusto incidunt aperiam quibusdam, iste amet aut
-                                nulla aspernatur repudiandae! Optio omnis laboriosam voluptatum delectus ab.</p>
-                            <p>Cum vitae odit esse placeat officia debitis neque quibusdam sit odio? Id
-                           deleniti itaque, debitis magni recusandae consectetur distinctio nemo?</p>
+                        <a href="{{ path('user_show', {'slug':a.slug}) }}">
+                            <h3>{{ a.fullName }}</h3>
+                        </a>
+                            <span class="badge badge-primary">{{ a.ads | length }} Announces</span>
+                            <p>{{ a.description | raw }}</p>
                     </div><!--End col-remain second row -->
              </div> <!-- End col-4 first row -->
       </div><!--End first-Row-->

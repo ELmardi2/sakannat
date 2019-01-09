@@ -1,0 +1,23 @@
+{% set url = path('ads_show', {'slug': ad.slug}) %}
+
+<div class="col-md-4">
+    <div class="card bg-light mb-3">
+         <div class="card-header text-center">
+             {{ ad.rooms }} Rooms -  <strong>{{ ad.price }} $!/night</strong><br>
+             <small>Not available yet</small>
+         </div>
+
+            <a href="{{ url }}">
+                <img src="{{ ad.coverImage }}" alt="Image of appartement" style="height:200px; width: 100%; display: block">
+            </a>
+            
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="{{ url }}"> {{ ad.title }} </a>
+                </h4>
+                 <p class="card-text">{{ ad.introduction }}  </p>
+                  <a href="{{url}}" class="btn btn-primary">Read More+</a>
+            </div>
+     </div>    
+</div>
+                        
