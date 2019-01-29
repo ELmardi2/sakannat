@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
@@ -33,6 +35,8 @@ class AdController extends AbstractController
      * Add new announces
      * 
      * @Route("/ads/new", name="ad_create")
+     * 
+     * @IsGranted("ROLE_USER")
      * 
      * 
      * @return Response
@@ -76,10 +80,11 @@ class AdController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * Edition of the announce
-     * @Route("/ads/{slug}/edit", name="ad_edit")
      * 
+     * @Route("/ads/{slug}/edit", name="ad_edit")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="it is not your")
      * 
      * @return Response
      */
@@ -117,7 +122,7 @@ class AdController extends AbstractController
             "ad" => $ad
         ]);
     }
-
+    
     /**
      * show the announce's details
      * 
@@ -132,6 +137,28 @@ class AdController extends AbstractController
          return $this->render('/ad/show.html.twig', [
              "ad" => $ad
          ]);
+     }
+     
+     /**
+      * Delete announce function
+      *
+      * @Route("/ads/{slug}/delete", name="ads_delete")
+      * @Security("is_granted('ROLE_USER') and user == ad.getAuthor() ", message="You can't detele this")
+      *
+      * @param Ad $ad
+      * @param ObjectManager $manager
+      * @return Response
+      */
+
+     public function delete(Ad $ad, ObjectManager $manager)
+     {
+         $manager->remove($ad);
+         $manager->flush();
+
+         $this->addFlash(
+             "success", "your announce <strong>{$ad->getTitle()}</strong> has been deleted successfully"
+         );
+         return $this->redirectToRoute("ads_index");
      }
 
 

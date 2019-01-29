@@ -11,7 +11,14 @@
             <p class="h2">
             <strong>{{ ad.rooms }} Rooms</strong> for <strong>{{ ad.price }} $/month</strong>
             </p>
-            <a href="#" class="btn btn-primary">Reseve</a>
+            <a href="#" class="btn btn-primary">Reserve</a>
+            {% if app.user and app.user == ad.author %}
+            <a href="{{ path('ad_edit',{'slug':ad.slug}) }}" class="btn btn-secondary">Edit the announce</a>
+            <a href="{{ path('ads_delete',{'slug':ad.slug}) }}" 
+            onclick="return confirm(`Are You Sure You Want To Delete the announce : {{ ad.title }} ?`) " class="btn btn-danger">
+            Delete
+            </a>
+            {% endif %}
         </div>
     </div>
 
