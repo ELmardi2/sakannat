@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reserve The Announce{{ ad.title }}!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Here You Can Reserve the announce : <strong>{{ ad.title }}</strong></h1>
+        <p>You Are Reserving The Announce Of <strong>{{ ad.author.fullName }} </strong> tell us if want we change something</p>
+        {{ form_start(form) }}
+        <div class="alert alert-light">
+            <h3>Here You Can Precise your date when you will arrive Or the date You thing it os good for you</h3>
+            <div class="row">
+            <div class="col">
+                {{ form_row(form.startDate) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.endDate) }}
+            </div>
+        </div>
+        <h4>Amount of residence : <span id="amount">...</span> $ Or SDN</h4>
+        <span id="days">0</span> nights about {{ ad.price }}/night Or Day;
+        <hr>
+        <h2>Do You Have A Comment !?</h2>
+        {{ form_row(form.comment) }}
+        </div>
+        <h4 class="mt-3">Did You Finished !?</h4>
+        <p>Renting Or hering We Are Here For Your Services !</p>
+        <button type="submit" class="btn btn-success">I Reserve This!</button>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#booking_startDate, #booking_endDate').datepicker({
+                format: 'dd/mm/yyyy',
+                datesDisabled: [
+                    {% for day in ad.notAvailableDays %}
+                        "{{ day.format('d/m/Y') }}",
+                    {% endfor %}
+                ],
+                startDate: new Date()
+        });
+
+        $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
+    });
+
+    function calculateAmount(){
+        //take the dates first
+        const endDate   = new Date($('#booking_endDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/,
+        '$3-$2-$1'));
+
+        const startDate = new Date($('#booking_startDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/,
+        '$3-$2-$1'));
+        
+        if(startDate && endDate && startDate < endDate){
+            const DAY_TIME = 24 * 60 * 60 * 1000;
+
+            const interval = endDate.getTime() - startDate.getTime();    
+            const days = interval / DAY_TIME;
+            const amount = days * {{ ad.price }};
+
+            $('#days').text(days);
+            $('#amount').text(amount.toLocaleString('fr-FR'));
+        }
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Errors404{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="bg-light">
+            <h1 >Ooooops ! The Page You Looking For Can't Find (-:-) !!!</h1>
+        <p>Please Check Your Info And Try Again Or !!!</p>
+
+        <a href="{{ path('homepage') }}" class="btn btn-info">Go Back To Homepage</a>
+        <a href="{{ path('ads_index') }}" class="btn btn-success">Go Back To Announces's Page </a>
+        </div>
+    </div>
+{% endblock %}

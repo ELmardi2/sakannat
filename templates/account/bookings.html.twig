@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} All Your Reservations Passed AndFuture </strong>!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>My Reservation</h1>
+        <div class="alert alert-info mt-4">
+            <p>Here You Can Find All The Reservations Passed And Future's Reservations</p>
+        </div>
+        {% for booking in app.user.bookings %}
+        {% set ad = booking.ad %}
+            <div class="row mt-4">
+                <div class="col-4">
+                    <img src="{{ ad.coverImage }}" alt="photo of the announce{{ ad.title }}" class="img-fluid">
+                </div>
+                <div class="col-8">
+                    <h4>{{ ad.title }}</h4>
+                    <p>
+                    Reservation <strong>N°{{ booking.id }}</strong><br>
+                    From{{ booking.startDate | date('d/m/Y') }} To {{ booking.endDate | date('d/m/Y') }}({{ booking.amount }} $ or SDN)
+                    </p>
+                    <a href="{{ path('booking_show',{'id':booking.id}) }}" class="btn btn-info">More Infos</a>
+                </div>
+            </div>    
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

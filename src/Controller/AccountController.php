@@ -167,4 +167,17 @@ class AccountController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
+
+    /**
+     * To How Many Reservatios I Have Done
+     * 
+     * @Route("/account/bookings", name="account_bookings")
+     * @IsGranted("ROLE_USER")
+     *
+     * @return Response
+     */
+    public function bookings()
+    {
+        return $this->render('/account/bookings.html.twig');
+    }
 }
