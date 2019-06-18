@@ -4,12 +4,37 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">Here is Your infos You can edit or change something</h1>
+        <h1 class="my-5">Here is Your infos You can edit or change something</h1>
        {{form_start(form)}}
-       
-       {{form_widget(form)}}
 
-        <button type="submit" class="btn btn-success">Save your modefications</button>
+       <div class="row">
+        <div class="col">
+        <div class="alert alert-light">
+            <h2 class="heading">My Information General</h2>
+            <hr>
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.picture) }}
+        </div>
+        </div>
+        <div class="col">
+            <div class="alert alert-light">
+                <h2 class="heading">Details</h2>
+                <hr>
+                {{ form_row(form.introduction) }}
+                {{ form_row(form.description) }}
+                <hr>
+                <p>If You have finished Your Account-modification Press Save Button</p>
+                <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check"></i>
+                Save your modefications
+                </button>
+            </div>
+        </div>
+       </div>
+       
+        
 
         {{ form_end(form) }}
     </div>

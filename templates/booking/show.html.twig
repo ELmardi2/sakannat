@@ -8,7 +8,7 @@
 {% set ad = booking.ad %}
 {% set author = ad.author %}
     <div class="container">
-         <h1 class="text-center">Here Your Reservation N: <strong>{{ booking.id }}</strong></h1>
+         <h1 class="my-5">Here Your Reservation N: <strong>{{ booking.id }}</strong></h1>
          {% if app.request.query.get('withAlert') %}
             <div class="alert alert-success">
                 <h1>Bravo!</h1>
@@ -42,7 +42,7 @@
                         <dt class="col-md-4">Total Amount</dt>
                         <dd class="col-md-8">{{ booking.amount }} $ Or SDN </dd>
                         <dt class="col-md-4">Comments</dt>
-                        <dd class="col-md-8">{{ booking.comment }}</dd>
+                        <dd class="col-md-8">{{ booking.comment | default("No Comment Yet") }}</dd>
                     </dl>
                     <hr>
 
@@ -56,6 +56,27 @@
                                 <a href="{{ path('user_show', {'slug':author.slug}) }}">{{ author.fullName }}</a>
                             </h4>
                             <span class="badge badge-primary">{{ author.ads | length }} announces</span>
+                        </div>
+                        <div class="alert alert-light" id="comment">
+                            <h2 class="alert-heading">Your Opinion Is Important!</h2>
+                            {% if date() > date(booking.endDate) %}
+                            {% set comment = booking.ad.CommentFromAuthor(app.user) %}
+                            {% if comment is not null %}
+                                <blockquote>
+                                {{ comment.content }}
+                                </blockquote>
+                                <strong>Rating : </strong>
+                                {% include 'incs/rating.html.twig' with {'rating':comment.rating} %}
+                            {% else %}
+                             {{ form_start(form) }}
+                             {{ form_widget(form) }}
+                             <button type="submit" class="btn btn-success">Confirm !</button>
+                             {{ form_end(form) }}
+                            {% endif %}
+                            {% else %}
+                                <p>You Can't Give Your Opinion Before Finishing Your Days Here+</p>
+                            {% endif %}
+                            
                         </div>
                     </div>
                     {{ author.description | raw }}

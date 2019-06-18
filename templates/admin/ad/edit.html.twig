@@ -1,0 +1,89 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Page Of Modification of the annouce number {{ ad.id }}{% endblock %}
+
+{# block body #}
+{% block body %}
+    <div class="container">
+        <h1>Modification Of The Announce : {{ ad.title }}</h1>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">
+                <div class="card btn-light">
+                    <div class="card-header">
+                        <h4 class="card-title">Corection The Announce ?</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check"></i>
+                                Save The Modifications
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">The Reservations</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <th>Id</th>
+                                <th>Gost</th>
+                                <th>Reservation Date</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                            {% for booking in ad.bookings %}
+                                <tr>
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{booking.booker.fullName  }}</td>
+                                    <td>{{ booking.createdAt | date('d/m/Y H:i') }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary">
+                                        <i class="fas fa-pen"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Comments</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <th>Id</th>
+                                <th>Gost</th>
+                                <th>Comment</th>
+                                <th>Note</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                            {% for comment in ad.comments %}
+                                <tr>
+                                    <td>{{ comment.id }}</td>
+                                    <td>{{ comment.author.fullName  }}</td>
+                                    <td>{{ comment.content }}</td>
+                                    <td>{{ comment.rating }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary">
+                                        <i class="fas fa-pen"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

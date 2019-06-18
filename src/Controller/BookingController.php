@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Entity\Booking;
+use App\Entity\Comment;
 use App\Form\BookingType;
+use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,12 +65,30 @@ class BookingController extends Controller
      * Allow to show reservation page
      * @Route("/booking/{id}", name="booking_show")
      * @param Booking $booking
+     * @param Request $request
+     * @param ObjectManager $Manager
      * @return Response
      */
-    public function show(Booking $booking)
+    public function show(Booking $booking, ObjectManager $manager, Request $request)
     {
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setad($booking->getad())
+                ->setAuthor($this->getuser());
+                $manager->persist($comment);
+                $manager->flush();
+                $this->addFlash(
+                    'success',
+                    "Thanks Your Comment Has Been Token in account"
+                );
+        }
+
         return $this->render('/booking/show.html.twig', [
-            'booking' => $booking
+            'booking' => $booking,
+            'form' => $form->createView()
         ]);
     }
 }

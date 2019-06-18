@@ -3,8 +3,13 @@
 <div class="col-md-4">
     <div class="card bg-light mb-3">
          <div class="card-header text-center">
-             {{ ad.rooms }} Rooms -  <strong>{{ ad.price }} $!/night</strong><br>
-             <small>Not available yet</small>
+             {{ ad.rooms }} Rooms -  <strong>{{ ad.price| number_format(2,',',' ') }} &pound; per night</strong><br>
+
+             {% if ad.comments | length > 0 %}
+                {% include 'incs/rating.html.twig' with {'rating':ad.avgRatings} %}
+             {% else %}    
+             <small>Not Rated yet</small>
+             {% endif %}
          </div>
 
             <a href="{{ url }}">
@@ -19,7 +24,7 @@
 
                  <p class="card-text">{{ ad.introduction }}</p>
 
-                  <a href="{{url}}" class="btn btn-secondary">Read More+</a>
+                  <a href="{{url}}" class="btn btn-primary float-right">Read More+</a>
                   {% if app.user and app.user == ad.author %}
                     <a href="{{ path('ad_edit',{'slug':ad.slug}) }}" class="btn btn-secondary">
                     Edit Your announce</a>

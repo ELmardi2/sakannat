@@ -14,7 +14,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    {% include 'incs/_nav.html.twig' %}
+    {% include 'admin/incs/_nav.html.twig' %}
    
     {% for label, messages in app.flashes %}
         <div class="container">
@@ -28,7 +28,7 @@
     
         {% block body %}{% endblock %}
 
-        {% include 'incs/_footer.html.twig' %}
+        {% include 'admin/incs/_footer.html.twig' %}
 
         <script  src="/js/jquery.min.js"></script>
         <script  src="/js/popper.min.js"></script>

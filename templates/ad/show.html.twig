@@ -9,7 +9,7 @@
             <h1 class="text-center">{{ ad.title }}</h1>
             <p>  {{ ad.introduction }} </p>
             <p class="h2">
-            <strong>{{ ad.rooms }} Rooms</strong> for <strong>{{ ad.price }} $/month</strong>
+            <strong>{{ ad.rooms }} Rooms</strong> for <strong>{{ ad.price | number_format(2, ',', ' ')}} &pound; per month</strong>
             </p>
             <a href="{{ path('booking_create', {'slug':ad.slug}) }}" class="btn btn-primary">Reserve</a>
             {% if app.user and app.user == ad.author %}
@@ -55,6 +55,37 @@
                         </a>
                     </div>
                  </div>
+                 <hr>
+                 {% if ad.comments|length > 0 %}
+                    <h1 class="mb-3">Comments of our visitors</h1>
+                    <div class="alert alert-info">
+                        <h4 class="alert alert-heading text-center">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    Global Rating Given By Our Visitors 
+                                </div>
+                                <div class="col">
+                                    {% include 'incs/rating.html.twig' with {'rating':ad.avgRatings} %} <br>
+                                    (<small>This Average Rating Calculated on {{ ad.comments | length }} Opinions </small> )
+                                </div>
+                        
+                            </div>
+                        </h4>
+                    </div>
+                    {% for comment in ad.comments %}
+                        <div class="bg-light rounded mb-3 py-3 px-3">
+                        <strong>{{ comment.author.firstName }} </strong>Said :
+                        <blockquote>
+                            {{ comment.content }}
+                        </blockquote>
+                        <strong>Rating Given :</strong>
+                        {% include 'incs/rating.html.twig' with {'rating':comment.rating} %}
+                        </div>
+                    {% endfor %}
+                 {% else %}
+                     <div class="alert alert-info">This Announe Has No Comment Yet</div>
+                 {% endif %}
+                 
             </div><!--End col-8 first row -->
              <div class="col"><!--Start col-4 first row -->
              {% set a = ad.author %}
