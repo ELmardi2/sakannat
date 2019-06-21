@@ -51,4 +51,35 @@ class AdminAdController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
+
+    /**
+     * Allow to delete annouce
+     * 
+     * @Route("/admin/ads/{id}/delele", name="admin_ads_delete")
+     *
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function delete(Ad $ad, ObjectManager $manager)
+    {
+        if (count($ad->getBookings()) > 0) {
+            $this->addFlash(
+                'warning',
+                "you can't delete the annouce <strong>{$ad->getTitle()}</strong> it has already reservation !"
+            );
+        }else 
+        {
+            $manager->remove($ad);
+
+            $manager->flush();
+
+         $this->addFlash(
+            'success',
+            "the annouce <strong>{$ad->getTitle()}</strong> has been deleted successfully"
+            );
+        }
+
+        return $this->redirectToRoute('admin_ads_index');
+    }
 }

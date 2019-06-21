@@ -33,7 +33,7 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Date(message="Attention! Your Dtae to arriveal must be valide")
-     * @Assert\GreaterThan("today", message="Your Date Arrival must not be before today")
+     * @Assert\GreaterThan("today", message="Your Date Arrival must not be before today", groups={"front"})
      */
     private $startDate;
 
@@ -63,6 +63,7 @@ class Booking
      * Callback fonction will be called 
      *
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      * 
      * @return void
      */

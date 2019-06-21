@@ -36,7 +36,18 @@ class AppFixtures extends Fixture
             ->setLastName('YAHIA')
             ->setemail('mardi166@gmail.com')
             ->sethash($this->encoder->encodePassword($adminUser, 'password'))
-            ->setPicture('images/lifo.png')
+            ->setPicture('https://randomuser.me/api/portraits/men/54.jpg')
+            ->setIntroduction($faker->sentence())
+            ->setDescription('<p>' . join('<p></p>', $faker->paragraphs(3)) . '</p>')
+            ->addUserRole($adminRole);
+
+        $manager->persist($adminUser);
+        $adminUser = new User();
+        $adminUser->setFirstName('Admino')
+            ->setLastName('CHEF')
+            ->setemail('admino@gmail.com')
+            ->sethash($this->encoder->encodePassword($adminUser, 'adminadmin'))
+            ->setPicture('https://randomuser.me/api/portraits/men/54.jpg')
             ->setIntroduction($faker->sentence())
             ->setDescription('<p>' . join('<p></p>', $faker->paragraphs(3)) . '</p>')
             ->addUserRole($adminRole);

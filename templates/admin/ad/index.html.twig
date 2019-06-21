@@ -1,8 +1,10 @@
 {% extends 'admin/base.html.twig' %}
 
+{% block title %}Administration Of Announces{% endblock %}
+
 {% block body %}
 <div class="container-fluid">
-<h1 class="mb-5 text-center">Announces Management</h1>
+<h1 class="my-5 text-center">Management Announces</h1>
 <table class=" table table-hover">
     <thead>
         <tr>
@@ -11,7 +13,7 @@
         <th>Author</th>
         <th class="text-center">Reservation</th>
         <th class="text-center">Rating</th>
-        <th>Action</th>
+        <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +33,7 @@
         </td>
         <td>
             <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+            <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
         </td>
         </tr>
     {% endfor %}

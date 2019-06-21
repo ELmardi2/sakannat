@@ -1,0 +1,22 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Page Of Modification of the comment No° {{ comment.id }}{% endblock %}
+
+{# block body #}
+{% block body %}
+    <div class="container">
+        <h1>Modification Of The comment No°: {{ comment.id }}</h1>
+        <div class="alert alert-info">
+            <strong>Comment linked to the announce </strong>{{ comment.ad.title }} <br>
+            <strong>Comment linked to the user </strong>{{ comment.author.fullName }} <br>
+            <strong>Comment Date added </strong>{{ comment.createdAt | date('d/m/Y H:i') }} <br>
+            <strong>Rating Given  </strong>{{ comment.rating }} <br>
+        </div>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check"></i>
+                Save Your Modification !
+            </button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
