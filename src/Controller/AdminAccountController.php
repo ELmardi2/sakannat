@@ -8,14 +8,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminAccountController extends AbstractController
 {
-    /**
-     * Access as admin
-     * 
-     * @Route("/admin/login", name="admin_account_login")
-     * 
-     */
+   /**
+    * Access as admin
+    * 
+    * @Route("/admin/login", name="admin_account_login")
+    *
+    * @param AuthenticationUtils $utils
+    * @return void
+    */
     public function login(AuthenticationUtils $utils)
     {
+        //
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
 
