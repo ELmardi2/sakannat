@@ -13,8 +13,8 @@
             </p>
             <a href="{{ path('booking_create', {'slug':ad.slug}) }}" class="btn btn-primary">Reserve</a>
             {% if app.user and app.user == ad.author %}
-            <a href="{{ path('ad_edit',{'slug':ad.slug}) }}" class="btn btn-secondary">Edit the announce</a>
-            <a href="{{ path('ads_delete',{'slug':ad.slug}) }}" 
+            <a href="{{ path('ads_edit',{'id':ad.id}) }}" class="btn btn-secondary">Edit the announce</a>
+            <a href="{{ path('ads_delete',{'id':ad.id}) }}" 
             onclick="return confirm(`Are You Sure You Want To Delete the announce : {{ ad.title }} ?`) " class="btn btn-danger">
             Delete
             </a>

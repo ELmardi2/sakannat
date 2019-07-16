@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Entity\UpdatePassword;
@@ -44,10 +45,10 @@ class AccountController extends AbstractController
      * @Route("/logout", name="account_logout")
      *
      * @return void
+     * @return Response
      */
-    public function logout()
-    {
-        //rien
+    public function logout(){
+            
     }
 
     /**

@@ -15,12 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminAdController extends AbstractController
 {
     /**
-     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
+     *  @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      */
     public function index(AdRepository $repo, $page, PaginationService $pagination)
     {
         /**
-         * find method to find ad by Id ex
+         * find method to find ad by Id examples
          */
         // $limit = 7;
         // $start = $page * $limit - $limit;

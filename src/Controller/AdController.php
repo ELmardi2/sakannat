@@ -70,7 +70,7 @@ class AdController extends AbstractController
             );
 
             return $this->redirectToRoute("ads_show", [
-                "slug" => $ad->getSlug(),
+                "id" => $ad->getId(),
                 
             ]);
         }
@@ -83,7 +83,7 @@ class AdController extends AbstractController
     /**
      * Edition of the announce
      * 
-     * @Route("/ads/{slug}/edit", name="ad_edit")
+     * @Route("/ads/{id}/edit", name="ads_edit")
      * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="it is not your")
      * 
      * @return Response
@@ -111,9 +111,8 @@ class AdController extends AbstractController
                 " Your announce <strong>{$ad->getTitle()}</strong> has been modified  successfully"
             );
 
-            return $this->redirectToRoute("ads_show", [
-                "slug" => $ad->getSlug(),
-                
+            return $this->redirectToRoute('ads_show', [
+                'id' => $ad->getId()
             ]);
         }
 
@@ -126,7 +125,7 @@ class AdController extends AbstractController
     /**
      * show the announce's details
      * 
-     * @Route("/ads/{slug}", name="ads_show")
+     * @Route("/ads/{id}", name="ads_show")
      * 
      * @return Response
      * 
@@ -142,7 +141,7 @@ class AdController extends AbstractController
      /**
       * Delete announce function
       *
-      * @Route("/ads/{slug}/delete", name="ads_delete")
+      * @Route("/ads/{id}/delete", name="ads_delete")
       * @Security("is_granted('ROLE_USER') and user == ad.getAuthor() ", message="You can't detele this")
       *
       * @param Ad $ad

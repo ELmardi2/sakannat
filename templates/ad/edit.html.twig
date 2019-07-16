@@ -18,7 +18,7 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
-
- {% block javascripts %}
-    <script src="/js/ad.js"></script>
- {% endblock %}
+ 
+{% block javascripts %}
+   <script src="{{ asset('build/js/ad.js') }}"></script>
+{% endblock %}

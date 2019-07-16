@@ -7,122 +7,52 @@
 {% block body %}
     <div class="container">
         <div class="jumbotron">
-            <h1 class="text-center">{{ title}}</h1>
-            <article>
-                Welcome to you in our website, We make you find your home to reside very easy or
-                to get a benifit from your house's space or even if you want to travel, you can
-                rente yours and hire another house in your distination
-            </article>
-            <p class="lead">
-                مرحبًا بك في موقعنا على الويب ، فنحن نجعلك تجد منزلك مكانًا سهلاً للغاية أو
-                للحصول على منفعة من مساحة منزلك أو حتى إذا كنت ترغب في السفر ، يمكنك ايجار
-                منزلك واستئجار منزل آخر في منطقتك.
-            </p>
-            <p class="lead">
-            Welcome to you in our website, We make you find your a house to residance very easy or to get a benifit from your house's space  or even if you want to travel, you can rente yours and hire another house  in your new destination.
-            Do you want travel any destination and you asked yourself how to find residance's house there?
-            Do have a house you want hire it?
-            Here is the solution take a look at our announces !! <br> <a href="#" class="btn btn-primary">Announces Here</a>
-            <hr>
-                        مرحبًا بك في موقعنا على الويب ، فنحن نجعلك تجد منزلًا سهلًا للمسكن أو للحصول على منفعة من مساحة منزلك أو حتى إذا كنت ترغب في السفر ، يمكنك استئجار منزلك واستئجار منزل آخر في وجهتك الجديدة.
-            هل تريد السفر إلى أي وجهة ، وسألت نفسك كيف تجد منزل الإقامة هناك؟
-            هل لديك منزل تريد استئجار ذلك؟
-            هنا هو الحل نلقي نظرة على إعلاناتنا!! <br><a href="#" class="btn btn-primary">نظرة على إعلاناتنا!</a>
-            </p>
+        <h1 class="text-center">{{ title}}</h1>
+            <div class="row">
+                <div class="col">
+                    <article>
+                        Welcome to you in our website, We make you find your home to reside very easy or
+                        to get a benifit from your house's space or even if you want to travel, you can
+                        rente yours and hire another house in your distination
+                    </article>
+                </div>
+                <div class="col">
+                  <p class="lead">
+                        مرحبًا بك في موقعنا على الويب ، فنحن نجعلك تجد منزلك مكانًا سهلاً للغاية أو
+                        للحصول على منفعة من مساحة منزلك أو حتى إذا كنت ترغب في السفر ، يمكنك ايجار
+                        منزلك واستئجار منزل آخر في منطقتك.
+                  </p>
+                </div>
+            </div>
         </div>
         <hr>
         <h2 class="H1 my-5">Our Appartements And Houses </h2>
         <div class="row mb-5">
-            <div class="col-md-4">
-                <div class="card bg-light mb-4">
-                    <div class="card-header text-center">
-                    3 rooms <strong>35$ night</strong><br>
-                    <small>Not available yet</small>
-                    </div>
-                     <img src="http://placehold.it/900x400" alt="Image of appartement" 
-                     style="height:200px width: 100% display: block">
-                </div>
-                <div class="card-body">
-                <h1 class="card-title">Best choice appartement</h1>
-                    <p>
-                        Best choice here you will have more than you have imagined. We give you best
-                        than your expectations
-                    </p>
-                    <a href="#" class="btn btn-primary">Read More+</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-light mb-4">
-                    <div class="card-header text-center">
-                    3 rooms <strong>35$ night</strong><br>
-                    <small>Not available yet</small>
-                    </div>
-                     <img src="http://placehold.it/900x400" alt="Image of appartement" 
-                     style="height:200px width: 100% display: block">
-                </div>
-                <div class="card-body">
-                <h1 class="card-title">Best choice appartement</h1>
-                    <p>
-                        Best choice here you will have more than you have imagined. We give you best
-                        than your expectations
-                    </p>
-                    <a href="#" class="btn btn-primary">Read More+</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-light mb-4">
-                    <div class="card-header text-center">
-                    3 rooms <strong>35$ night</strong><br>
-                    <small>Not available yet</small>
-                    </div>
-                     <img src="http://placehold.it/900x400" alt="Image of appartement" 
-                     style="height:200px width: 100% display: block">
-                </div>
-                <div class="card-body">
-                <h1 class="card-title">Best choice appartement</h1>
-                    <p>
-                        Best choice here you will have more than you have imagined. We give you best
-                        than your expectations
-                    </p>
-                    <a href="#" class="btn btn-primary">Read More+</a>
-                </div>
-            </div>
+            {% for data in ads %}
+                {% include 'ad/_ad.html.twig' with {'ad': data.announce} %}
+            {% endfor %}
         </div>
         <hr>
         <h2 class="H1 my-5">Our Owners's stars</h2>
         <div class="row">
+        {% for data in users %}
             <div class="col-md-6">
               <div class="card border-secondary mb-3">
                  <div class="card-body">
-                        <h4 class="cart-title">Mardino Y</h4>
+                        <h4 class="cart-title">{{ data.user.fullName }}</h4>
                         <hr>
                      <div class="card-text">
-                         <img src="http://placehold.it/66x64" alt="Avatar-Mardino" class="float-left mr-3">
+                         <img src="{{ data.user.picture }}" alt="{{ data.user.fullName }}" class="float-left mr-3">
                             <p>
-                            Best choice here you will have more than you have imagined. We give you best
-                            than your expectations
+                           {{  data.user.introduction }}
                             </p>
-                            <a href="#" class="btn btn-primary float-right">Read More +</a>
+                            <a href="{{ path('user_show',{'slug': data.user.slug}) }}" class="btn btn-primary float-right">Read More +</a>
                      </div>
                  </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="card border-secondary mb-3">
-                 <div class="card-body">
-                        <h4 class="cart-title">Mardino Y</h4>
-                        <hr>
-                     <div class="card-text">
-                         <img src="http://placehold.it/66x64" alt="Avatar-Mardino" class="float-left mr-3">
-                            <p>
-                            Best choice here you will have more than you have imagined. We give you best
-                            than your expectations
-                            </p>
-                            <a href="#" class="btn btn-primary float-right">Read More +</a>
-                     </div>
-                 </div>
-              </div>
-            </div>
+        {% endfor %}
+            
         </div>
     </div>
 {% endblock %}

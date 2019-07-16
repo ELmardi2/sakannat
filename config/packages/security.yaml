@@ -32,13 +32,14 @@ security:
 
             provider: in_database
 
-            form_login:
+            form_login: 
                 login_path: account_login
                 check_path: account_login
 
             logout:
-                path: admin_account_logout
-                target: admin_account_login
+                path: account_logout
+                target: account_login
+
             # activate different ways to authenticate
 
             # http_basic: true
